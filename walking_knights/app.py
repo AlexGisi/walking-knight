@@ -1,5 +1,6 @@
+from time import time
 from flask import Flask, render_template, request, jsonify, Blueprint
-from .knights import knight_walk
+from .knights import knight_walk, longest_walk
 
 
 walking_knights = Blueprint(
@@ -27,5 +28,21 @@ def get_knight_walk_move():
     return jsonify(
         {
             "moves": moves,
+        }
+    )
+    
+@walking_knights.route("/knight_walk_longest", methods=["POST"])
+def get_knight_walk_longest():
+    data = request.json
+    use_cache = data.get("use_cache")
+    
+    start = time()
+    moves = longest_walk(use_cache=use_cache)
+    end = time()
+    
+    return jsonify(
+        {
+            "moves": moves,
+            "time": str(round(end-start, 4))
         }
     )
