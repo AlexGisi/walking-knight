@@ -47,7 +47,7 @@ class Board:
         legal = [sq for sq in pseudo if self.board[sq] != 0]
         return [Move(sq) for sq in legal]
     
-def bfs(from_sq: Move, to_sq: Move) -> Move:
+def bfs(board: Board, from_sq: Move, to_sq: Move) -> Move:
     q = SimpleQueue()
     q.put(from_sq)
     while not q.empty():
@@ -60,6 +60,26 @@ def bfs(from_sq: Move, to_sq: Move) -> Move:
             q.put(mv)
             
     return None
+
+
+def knight_walk(start: str, end: str):
+    board = Board()
+    
+    f = Move(sq64to120(start))
+    t = Move(sq64to120(end))
+    res = bfs(board, f, t)
+    
+    if res:
+        moves = list()
+        while res.parent:
+            moves.append(res)
+            res = res.parent
+        moves.append(res)
+        moves.reverse()
+            
+        return [sq120to64(mv.square) for mv in moves]
+    else:
+        return None
                 
                 
 if __name__ == '__main__':
@@ -69,20 +89,6 @@ if __name__ == '__main__':
     F = 44
     T = 14
     
-    f = Move(sq64to120(F))
-    t = Move(sq64to120(T))
-    res = bfs(f, t)
-    
-    if res:
-        moves = list()
-        while res.parent:
-            moves.append(res)
-            res = res.parent
-        moves.append(res)
-        moves.reverse()
-        
-        for mv in moves:
-            print(sq120to64(mv.square))
-    else:
-        print("Not possible")
+    moves = knight_walk(F, T)
+    print(moves)
     

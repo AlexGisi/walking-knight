@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Walking Knights</title>
+    <link rel="stylesheet" href="{{ url_for('walking_knights.static', filename='walking_knights.css') }}">
+
+    {% set N = 8 %}
+</head>
+<body>
+    <div class="header">
+        <h1>Walking Knights</h1>
+        <p>In chess, a knight moves in an L-shape. How many moves does it take for the knight to get from a given square to another?</p>
+    </div>
+    <br>
+    <div class="inputs">
+        <button id="btn-select-start" type="button">Select start</button>
+        <button id="btn-select-end" type="button">Select end</button>
+        <table>
+            <!-- Number the square 1 to 64. -->
+            {% for i in range(N) %}
+                <tr>
+                    {% for j in range(N) %}
+                    <td class="board-square" id="{{ (i * 8) + j + 1 }}"></td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+        <button id='btn-calculate' type="button">Calculate🤔💭</button>
+    </div>
+
+    <div class="outputs">
+        <p id="error-msg"></p>
+        <p id="output-msg"></p>
+    </div>
+
+    <script src="{{ url_for('walking_knights.static', filename="walking_knights.js") }}"></script>
+
+</body>
+</html>

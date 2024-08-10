@@ -1,0 +1,33 @@
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    overflow: hidden;
+}
+
+td.board-square {
+    width: 50px;
+    height: 50px;
+}
+
+td.board-square.start-hover:hover {
+    background-color: lightgreen;
+}
+
+td.board-square.end-hover:hover {
+    background-color: rgb(228, 125, 125);
+}
+
+td.start-square {
+    background-color: green;
+}
+
+td.end-square {
+    background-color: red;
+}
+
+#error-msg {
+    color: red;
+}
